@@ -1,3 +1,12 @@
+$(document).ready(function()
+{ 
+if ($("#alertSuccess").text().trim() == "") 
+ { 
+ $("#alertSuccess").hide(); 
+ } 
+ $("#alertError").hide(); 
+});
+
 $(document).on("click", "#btnSave", function(event){ 
 	
 	// Clear alerts---------------------
@@ -41,7 +50,7 @@ function onPaySaveComplete(response, status){
 			 
 			 $("#alertSuccess").text("Successfully saved."); 
 			 $("#alertSuccess").show(); 
-			 $("#divItemsGrid").html(resultSet.data); 
+			 $("#divPaymentGrid").html(resultSet.data); 
 		 } 
 		 else if (resultSet.status.trim() == "error") {
 			 
@@ -66,10 +75,11 @@ function onPaySaveComplete(response, status){
 // UPDATE==========================================
 $(document).on("click", ".btnUpdate", function(event){ 
 		
-		 $("#hidpid").val($(this).data("payID")); 
+		 //$("#hidpid").val($(this).data("payID"));
+		 $("#hidpid").val($(this).closest("tr").find('td:eq(0)').text()); 
 		 $("#orderid").val($(this).closest("tr").find('td:eq(1)').text()); 
 		 $("#amount").val($(this).closest("tr").find('td:eq(3)').text()); 
-		 //$("#hidpid").val($(this).closest("tr").find('td:eq(3)').text()); 
+		  
 		
 		 
 });
@@ -128,7 +138,7 @@ function validatePayForm(){
 // OrderID-------------------------------
 if ($("#orderid").val().trim() == ""){
 	
-	return "Insert Item title.";
+	return "Insert Order ID.";
 }
 
 		
